@@ -14,22 +14,22 @@ export class BooksService {
   createBook(createBookDto: CreateBookDto) {
     const newBook = this.bookRepository.create(createBookDto)
 
-    return this.bookRepository.insert(newBook);
+    return this.bookRepository.insert(newBook)
   }
 
   findAllBooks() {
-    return `This action returns all books`;
+    return this.bookRepository.find()
   }
 
   findOneBook(id: number) {
-    return `This action returns a #${id} book`;
+    return this.bookRepository.findBy({ id: id })
   }
 
   updateBook(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+    return this.bookRepository.update({ id: id, }, { ...updateBookDto })
   }
 
   removeBook(id: number) {
-    return `This action removes a #${id} book`;
+    return this.bookRepository.delete({ id: id });
   }
 }
