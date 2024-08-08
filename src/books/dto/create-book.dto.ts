@@ -1,7 +1,13 @@
+import { IsAlphanumeric, IsNotEmpty } from "class-validator";
+
 export class CreateBookDto {
 
   @IsNotEmpty()
   title: string;
+
+  @IsNotEmpty()
   author: string;
+
+  @IsAlphanumeric()
   publishedAt: number;
 }
