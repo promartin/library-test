@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Rent } from "src/rent/entities/rent.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -10,4 +11,10 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ type: 'boolean' })
+  employee: boolean;
+
+  @OneToMany(() => Rent, (rental) => rental.user)
+  rentals: Rent[];
 }
