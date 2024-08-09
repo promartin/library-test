@@ -1,5 +1,5 @@
 import { NestFactory } from "@nestjs/core";
-import { USERS } from "factory/user.factory";
+import { USERS } from "../factory/user.factory";
 import { AppModule } from "src/app.module";
 import { User } from "src/users/entities/user.entity";
 import { DataSource } from "typeorm";
