@@ -3,6 +3,7 @@ import { RentService } from './rent.service';
 import { CreateRentDto } from './dto/create-rent.dto';
 import { UpdateRentDto } from './dto/update-rent.dto';
 import { Rent } from './entities/rent.entity';
+import { Public } from 'src/decorators/auth.decorator';
 
 @Controller('rents')
 export class RentController {
@@ -14,11 +15,13 @@ export class RentController {
   }
 
   @Get()
+  @Public()
   findAll(): Promise<Rent[]> {
     return this.rentService.findAll();
   }
 
   @Get(':id')
+  @Public()
   findOne(@Param('id') id: number): Promise<Rent> {
     return this.rentService.findOne(id);
   }
