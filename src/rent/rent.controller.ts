@@ -10,10 +10,12 @@ export class RentController {
   constructor(private readonly rentService: RentService) { }
 
   @Post()
+  @Public()
   create(@Body() createRentDto: CreateRentDto): Promise<Rent> {
     return this.rentService.create(createRentDto);
   }
 
+  /*
   @Get()
   @Public()
   findAll(): Promise<Rent[]> {
@@ -35,4 +37,5 @@ export class RentController {
   remove(@Param('id') id: number): Promise<void> {
     return this.rentService.remove(id);
   }
+  */
 }

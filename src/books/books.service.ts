@@ -12,7 +12,7 @@ export class BooksService {
     @InjectRepository(Book) private bookRepository: Repository<Book>
   ) { }
 
-  private readonly books = [
+  private readonly books: Book[] = [
     {
       id: 1,
       title: '1984',

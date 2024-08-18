@@ -11,9 +11,9 @@ export class CreateRentDto {
 
   @IsNotEmpty()
   @IsDateString()
-  rentalDate: Date;
+  rentalDate: string;
 
   @IsNotEmpty()
   @IsDateString()
-  returnDate: Date;
+  returnDate: string;
 }

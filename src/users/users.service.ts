@@ -11,7 +11,7 @@ export class UsersService {
     @InjectRepository(User) private rentRepository: Repository<User>
   ) { }
 
-  private readonly users = [
+  private readonly users: User[] = [
     {
       id: 1,
       username: 'john',
@@ -57,8 +57,12 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  async findOne(username: string): Promise<User | undefined> {
+  findOne(username: string) {
     return this.users.find(user => user.username === username);
+  }
+
+  findOneById(id: number) {
+    return this.users.find(user => user.id === id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
