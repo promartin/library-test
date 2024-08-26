@@ -10,10 +10,10 @@ export class AuthService {
   ) { }
 
   async signIn(username: string, pass: string): Promise<{ access_token: string }> {
-    const user = await this.userService.findOne(username);
+    const user = await this.userService.findByUsername(username);
 
     if (user?.password !== pass) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException({ error: "Password doesn't match" });
     }
 
     const payload = { sub: user.id, username: user.username, employee: user.employee };

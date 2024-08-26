@@ -1,7 +1,8 @@
 import { Rent } from "src/rent/entities/rent.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
+@Unique(["username"])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;

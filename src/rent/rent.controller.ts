@@ -1,16 +1,23 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { RentService } from './rent.service';
 import { CreateRentDto } from './dto/create-rent.dto';
-import { UpdateRentDto } from './dto/update-rent.dto';
 import { Rent } from './entities/rent.entity';
-import { Public } from 'src/decorators/auth.decorator';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { RolesGuard } from 'src/roles/roles.guard';
+import { Employee } from 'src/decorators/roles.decorator';
 
+ApiTags('Rents')
 @Controller('rents')
 export class RentController {
   constructor(private readonly rentService: RentService) { }
 
   @Post()
-  @Public()
+  @UseGuards(RolesGuard)
+  @Employee(true)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Creating rent, only employees can do that.' })
+  @ApiResponse({ status: 200, description: 'Rent created.' })
+  @ApiResponse({ status: 403, description: 'Forbidden resource.' })
   create(@Body() createRentDto: CreateRentDto): Promise<Rent> {
     return this.rentService.create(createRentDto);
   }
